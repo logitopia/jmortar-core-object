@@ -8,14 +8,14 @@ version = '1.0.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8'
 }
 
 repositories {
-  maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "http://repo.maven.apache.org/maven2" }
 
-  mavenLocal()
-  jcenter()
+    mavenLocal()
+    jcenter()
 }
 
 publishing {
@@ -30,8 +30,8 @@ publishing {
 }
 
 dependencies {
-  compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.25'
-  compile group: 'com.logitopia', name: 'jmortar-core-test', version: '1.0.0'
-  compile group: 'org.springframework', name: 'spring-context', version:'4.0.0.RELEASE'
-  testCompile group: 'junit', name: 'junit', version:'4.12'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    compile group: 'com.logitopia', name: 'jmortar-core-test', version: '1.0.0'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.0.0.RELEASE'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
