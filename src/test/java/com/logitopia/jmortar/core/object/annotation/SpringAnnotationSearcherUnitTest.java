@@ -6,8 +6,6 @@ import com.logitopia.jmortar.core.test.AbstractUnitTest;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
