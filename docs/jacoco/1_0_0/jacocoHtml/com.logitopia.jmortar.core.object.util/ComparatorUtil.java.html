@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ComparatorUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jmortar-core-object</a> &gt; <a href="index.source.html" class="el_package">com.logitopia.jmortar.core.object.util</a> &gt; <span class="el_source">ComparatorUtil.java</span></div><h1>ComparatorUtil.java</h1><pre class="source lang-java linenums">/* 
+ * Software is the property of Stephen Cheesley.
+ * All Rights Reserved.
+ */
+package com.logitopia.jmortar.core.object.util;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The &lt;tt&gt;ComparatorUtil&lt;/tt&gt; class is an implementation of a utility that
+ * performs services for comparators.
+ *
+ * @author Stephen Cheesley &amp;lt;stephen.cheesley@gmail.com&amp;gt;
+ */
+public final class ComparatorUtil {
+
+  /**
+   * Equals comparison operation.
+   */
+  public static final String COMPARATOR_EQUALS = &quot;==&quot;;
+
+  /**
+   * Not Equals comparison operation.
+   */
+  public static final String COMPARATOR_NEQUALS = &quot;!=&quot;;
+
+  /**
+   * More than comparison operation.
+   */
+  public static final String COMPARATOR_MORE = &quot;&gt;&quot;;
+
+  /**
+   * Less than comparison operation.
+   */
+  public static final String COMPARATOR_LESS = &quot;&lt;&quot;;
+
+  /**
+   * More than OR equal to comparison operation.
+   */
+  public static final String COMPARATOR_MORE_EQ = &quot;&gt;=&quot;;
+
+  /**
+   * Less than OR equal to comparison operation.
+   */
+  public static final String COMPARATOR_LESS_EQ = &quot;&lt;=&quot;;
+
+  /**
+   * Like (search) comparison operation.
+   */
+  public static final String COMPARATOR_LIKE = &quot;LIKE&quot;;
+
+  /**
+   * The logger for this class.
+   */
+<span class="fc" id="L56">  public static final Logger LOG</span>
+<span class="fc" id="L57">          = LoggerFactory.getLogger(ComparatorUtil.class);</span>
+
+  /**
+   * The default constructor is private as this is a utility class.
+   */
+  private ComparatorUtil() {
+  }
+
+  /**
+   * Compare two integers by the comparator passed.
+   *
+   * @param comparator The comparator to use for compare.
+   * @param subject1 The subject to compare.
+   * @param subject2 The value to compare to.
+   * @return The result of the compare.
+   */
+  private static boolean compareInteger(final String comparator,
+          final Integer subject1,
+          final Integer subject2) {
+<span class="fc" id="L76">    boolean result = false;</span>
+
+<span class="pc bpc" id="L78" title="3 of 5 branches missed.">    switch (comparator) {</span>
+      case COMPARATOR_LESS:
+        /* Less than */
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        result = subject1 &lt; subject2;</span>
+<span class="nc" id="L82">        break;</span>
+      case COMPARATOR_LESS_EQ:
+        /* Less than or Equal To */
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        result = subject1 &lt;= subject2;</span>
+<span class="nc" id="L86">        break;</span>
+      case COMPARATOR_MORE:
+        /* More than */
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        result = subject1 &gt; subject2;</span>
+<span class="fc" id="L90">        break;</span>
+      case COMPARATOR_MORE_EQ:
+        /* More than or Equal To */
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        result = subject1 &gt;= subject2;</span>
+        break;
+    }
+
+<span class="fc" id="L97">    return result;</span>
+  }
+
+  /**
+   * Compare two doubles by the comparator passed.
+   *
+   * @param comparator The comparator to use for compare.
+   * @param subject1 The subject to compare.
+   * @param subject2 The value to compare to.
+   * @return The result of the compare.
+   */
+  private static boolean compareDouble(final String comparator,
+          final Double subject1,
+          final Double subject2) {
+<span class="nc" id="L111">    boolean result = false;</span>
+
+<span class="nc bnc" id="L113" title="All 5 branches missed.">    switch (comparator) {</span>
+      case COMPARATOR_LESS:
+        /* Less than */
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        result = subject1 &lt; subject2;</span>
+<span class="nc" id="L117">        break;</span>
+      case COMPARATOR_LESS_EQ:
+        /* Less than or Equal To */
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        result = subject1 &lt;= subject2;</span>
+<span class="nc" id="L121">        break;</span>
+      case COMPARATOR_MORE:
+        /* More than */
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        result = subject1 &gt; subject2;</span>
+<span class="nc" id="L125">        break;</span>
+      case COMPARATOR_MORE_EQ:
+        /* More than or Equal To */
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        result = subject1 &gt;= subject2;</span>
+        break;
+    }
+
+<span class="nc" id="L132">    return result;</span>
+  }
+
+  /**
+   * Compare two strings using the comparator provided.
+   *
+   * @param comparator The comparator to use.
+   * @param subject1 The value for comparison.
+   * @param subject2 The value to compare against.
+   * @return The result of the comparison.
+   */
+  private static boolean compareString(final String comparator,
+          final String subject1,
+          final String subject2) {
+<span class="fc" id="L146">    boolean result = false;</span>
+
+<span class="pc bpc" id="L148" title="3 of 6 branches missed.">    switch (comparator) {</span>
+      case COMPARATOR_LIKE:
+<span class="fc" id="L150">        result = subject1.contains(subject2);</span>
+        break;
+    }
+
+<span class="fc" id="L154">    return result;</span>
+  }
+
+  /**
+   * Compare the two objects based on the comparator passed.
+   *
+   * @param comparator The comparator.
+   * @param subject1 The basis for comparison.
+   * @param subject2 The object to compare.
+   * @return The result of the compare.
+   */
+  public static boolean compare(final String comparator,
+          final Object subject1,
+          final Object subject2) {
+<span class="fc" id="L168">    boolean result = false;</span>
+
+<span class="pc bpc" id="L170" title="2 of 10 branches missed.">    switch (comparator) {</span>
+      case COMPARATOR_EQUALS:
+        /* Equals */
+<span class="fc" id="L173">        result = subject1.equals(subject2);</span>
+<span class="fc" id="L174">        break;</span>
+      case COMPARATOR_NEQUALS:
+        /* Not Equals */
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">        result = !subject1.equals(subject2);</span>
+<span class="fc" id="L178">        break;</span>
+      default:
+        /* Check the remaining comparators. */
+<span class="pc bpc" id="L181" title="1 of 4 branches missed.">        if (subject1 instanceof Integer &amp;&amp; subject2 instanceof Integer) {</span>
+<span class="fc" id="L182">          Integer int1 = (Integer) subject1;</span>
+<span class="fc" id="L183">          Integer int2 = (Integer) subject2;</span>
+<span class="fc" id="L184">          result = compareInteger(comparator, int1, int2);</span>
+        }
+<span class="pc bpc" id="L186" title="3 of 4 branches missed.">        if (subject1 instanceof Double &amp;&amp; subject2 instanceof Double) {</span>
+<span class="nc" id="L187">          Double dbl1 = (Double) subject1;</span>
+<span class="nc" id="L188">          Double dbl2 = (Double) subject2;</span>
+<span class="nc" id="L189">          result = compareDouble(comparator, dbl1, dbl2);</span>
+        }
+<span class="pc bpc" id="L191" title="1 of 4 branches missed.">        if (subject1 instanceof String &amp;&amp; subject2 instanceof String) {</span>
+<span class="fc" id="L192">          String str1 = (String) subject1;</span>
+<span class="fc" id="L193">          String str2 = (String) subject2;</span>
+<span class="fc" id="L194">          result = compareString(comparator, str1, str2);</span>
+        }
+        break;
+    }
+
+<span class="fc" id="L199">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

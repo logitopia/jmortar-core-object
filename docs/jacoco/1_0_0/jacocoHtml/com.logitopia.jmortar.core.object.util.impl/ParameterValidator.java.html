@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParameterValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jmortar-core-object</a> &gt; <a href="index.source.html" class="el_package">com.logitopia.jmortar.core.object.util.impl</a> &gt; <span class="el_source">ParameterValidator.java</span></div><h1>ParameterValidator.java</h1><pre class="source lang-java linenums">/* 
+ * Software is the property of Stephen Cheesley.
+ * All Rights Reserved.
+ */
+package com.logitopia.jmortar.core.object.util.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The &lt;tt&gt;ParameterValidator&lt;/tt&gt; class is an implementation of a static
+ * utility that validates parameters passed to a given method. It will check
+ * that the parameters passed for issues like, null values and empty strings.
+ *
+ * @author &amp;lt;Stephen Cheesley stephen.cheesley@gmail.com&amp;gt;
+ */
+<span class="nc" id="L17">public class ParameterValidator {</span>
+
+  /**
+   * The logger for this class.
+   */
+<span class="fc" id="L22">  public static final Logger LOG</span>
+<span class="fc" id="L23">          = LoggerFactory.getLogger(ParameterValidator.class);</span>
+
+  /**
+   * Indicates that a check for null parameter is required.
+   */
+  public static final byte NULL_VALIDATE = 1;
+
+  /**
+   * Indicates that a check for an empty String parameter is required.
+   */
+  public static final byte STR_EMPTY_VALIDATE = 2;
+
+  /**
+   * Validate the parameters passed.
+   *
+   * @param testTypes The type of validation checks to carry out.
+   * @param parameters The parameters to carry out the checks on.
+   * @param parameterNames The names of the parameters that are being checked.
+   * @param throwExceptions Should exceptions be thrown if values are missing.
+   * @param clazz The class containing the method being validated.
+   * @param methodName The name of the method being validated.
+   */
+  public static final void validateParameters(final byte[] testTypes,
+          final Object[] parameters,
+          final String[] parameterNames,
+          final boolean throwExceptions,
+          final Class clazz,
+          final String methodName) {
+
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">    for (int i = 0; i &lt; parameters.length; i++) {</span>
+      /* Check NULL FIRST. */
+<span class="fc bfc" id="L54" title="All 2 branches covered.">      if (isCheckPresent(testTypes, NULL_VALIDATE)) {</span>
+        /* Validate NULL. */
+<span class="nc" id="L56">        validateNullParameter(parameters[i],</span>
+                parameterNames[i],
+                throwExceptions,
+                clazz,
+                methodName);
+      }
+
+      /* Check (if string) that it is not empty. */
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">      if (isCheckPresent(testTypes, STR_EMPTY_VALIDATE)) {</span>
+<span class="nc" id="L65">        validateEmptyStringParameter(parameters[i],</span>
+                parameterNames[i],
+                throwExceptions,
+                clazz,
+                methodName);
+      }
+    }
+<span class="nc" id="L72">  }</span>
+
+  /**
+   * Is the given check present.
+   *
+   * @param testTypes The types to check through.
+   * @param testType The type to check.
+   * @return The result flag (true == present).
+   */
+  private static boolean isCheckPresent(final byte[] testTypes,
+          final byte testType) {
+<span class="fc" id="L83">    boolean result = false;</span>
+
+<span class="fc bfc" id="L85" title="All 2 branches covered.">    for (byte type : testTypes) {</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">      if (type == testType) {</span>
+<span class="fc" id="L87">        result = true;</span>
+      }
+    }
+
+<span class="fc" id="L91">    return result;</span>
+  }
+
+  /**
+   * Validate that the given parameter is not null. Log the expected output and
+   * throw the necessary exceptions.
+   *
+   * @param parameter The parameter to validate.
+   * @param parameterName The parameter name to validate.
+   * @param throwExceptions Flag indicates exception requirement.
+   * @param clazz The class that contains the method.
+   * @param methodName The method being passed parameters.
+   */
+  private static void validateNullParameter(final Object parameter,
+          final String parameterName,
+          final boolean throwExceptions,
+          final Class clazz,
+          final String methodName) {
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">    if (parameter == null) {</span>
+<span class="fc" id="L110">      String className = clazz.getSimpleName();</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">      if (LOG.isDebugEnabled()) {</span>
+<span class="fc" id="L112">        LOG.debug(parameterName + &quot; is null from call to &quot; + methodName);</span>
+      }
+        
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">      if (LOG.isTraceEnabled()) {</span>
+<span class="fc" id="L116">        StringBuilder trcMsg = new StringBuilder();</span>
+<span class="fc" id="L117">        trcMsg.append(&quot;[&quot;).append(className).append(&quot;.&quot;)</span>
+<span class="fc" id="L118">                .append(methodName).append(&quot;] &quot;)</span>
+<span class="fc" id="L119">                .append(&quot;The parameter &quot;).append(parameterName)</span>
+<span class="fc" id="L120">                .append(&quot; is null.&quot;);</span>
+<span class="fc" id="L121">        LOG.trace(trcMsg.toString());</span>
+      }
+
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">      if (throwExceptions) {</span>
+<span class="fc" id="L125">        StringBuilder exceptionMsg = new StringBuilder();</span>
+<span class="fc" id="L126">        exceptionMsg.append(className).append(&quot;.&quot;).append(methodName)</span>
+<span class="fc" id="L127">                .append(&quot; was passed a null parameter @ &quot;)</span>
+<span class="fc" id="L128">                .append(parameterName);</span>
+<span class="fc" id="L129">        throw new IllegalArgumentException(exceptionMsg.toString());</span>
+      }
+    }
+<span class="nc" id="L132">  }</span>
+
+  /**
+   * Validates to see whether, if the parameter passed is a String, it does not
+   * contain an empty value.
+   *
+   * @param parameter The parameter to be validated.
+   * @param parameterName The name of the parameter being validated.
+   * @param throwExceptions Flag indicates exception requirement.
+   * @param clazz The class that contains the method.
+   * @param methodName The name of the method that has been executed.
+   */
+  private static void validateEmptyStringParameter(final Object parameter,
+          final String parameterName,
+          final boolean throwExceptions,
+          final Class clazz,
+          final String methodName) {
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">    if (parameter instanceof String) {</span>
+<span class="fc" id="L150">      String param = (String) parameter;</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">      if (param.isEmpty()) {</span>
+<span class="fc" id="L152">        String className = clazz.getSimpleName();</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if (LOG.isDebugEnabled()) {</span>
+<span class="fc" id="L154">          LOG.debug(parameterName + &quot; is 'empty (blank)' from call to &quot;</span>
+                  + methodName);
+        }
+
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if (LOG.isTraceEnabled()) {</span>
+<span class="fc" id="L159">          StringBuilder trcMsg = new StringBuilder();</span>
+<span class="fc" id="L160">          trcMsg.append(&quot;[&quot;).append(className).append(&quot;.&quot;)</span>
+<span class="fc" id="L161">                  .append(methodName).append(&quot;] &quot;)</span>
+<span class="fc" id="L162">                  .append(&quot;The parameter &quot;).append(parameterName)</span>
+<span class="fc" id="L163">                  .append(&quot; is empty / blank.&quot;);</span>
+<span class="fc" id="L164">          LOG.trace(trcMsg.toString());</span>
+        }
+
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if (throwExceptions) {</span>
+<span class="fc" id="L168">          StringBuilder exceptionMsg = new StringBuilder();</span>
+<span class="fc" id="L169">          exceptionMsg.append(className).append(&quot;.&quot;).append(methodName)</span>
+<span class="fc" id="L170">                  .append(&quot; was passed an empty parameter @ &quot;)</span>
+<span class="fc" id="L171">                  .append(parameterName);</span>
+<span class="fc" id="L172">          throw new IllegalArgumentException(exceptionMsg.toString());</span>
+        }
+      }
+    }
+<span class="nc" id="L176">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

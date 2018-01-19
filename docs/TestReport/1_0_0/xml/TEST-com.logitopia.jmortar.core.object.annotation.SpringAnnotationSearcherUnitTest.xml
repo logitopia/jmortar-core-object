@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-01-19T21:59:11" hostname="DESKTOP-2PUINBP" time="0.369">
+  <properties/>
+  <testcase name="testFieldAnnotationSearchSuccess" classname="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" time="0.012"/>
+  <testcase name="testMultipleAnnotationSuccess" classname="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" time="0.278"/>
+  <testcase name="testAnnotationFilterSuccess" classname="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" time="0.035"/>
+  <testcase name="testMultipleAnnotationFilteredSuccess" classname="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" time="0.024"/>
+  <testcase name="testBasicSuccess" classname="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" time="0.019"/>
+  <testcase name="testFieldNameAnnotationSearchSuccess" classname="com.logitopia.jmortar.core.object.annotation.SpringAnnotationSearcherUnitTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
