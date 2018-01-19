@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.logitopia.jmortar.core.object.util.impl.ParameterValidatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-01-19T21:59:11" hostname="DESKTOP-2PUINBP" time="0.006">
+  <properties/>
+  <testcase name="testValidateNullParameter" classname="com.logitopia.jmortar.core.object.util.impl.ParameterValidatorTest" time="0.005"/>
+  <testcase name="testValidateEmptyStringParameter" classname="com.logitopia.jmortar.core.object.util.impl.ParameterValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[2018-01-19 21:59:11,499 DEBUG - parameter1 is null from call to testMethod
+2018-01-19 21:59:11,499 TRACE - [Object.testMethod] The parameter parameter1 is null.
+2018-01-19 21:59:11,499 INFO  - testValidateNullParameter
+2018-01-19 21:59:11,499 DEBUG - parameter1 is 'empty (blank)' from call to testMethod
+2018-01-19 21:59:11,499 TRACE - [Object.testMethod] The parameter parameter1 is empty / blank.
+]]></system-err>
+</testsuite>

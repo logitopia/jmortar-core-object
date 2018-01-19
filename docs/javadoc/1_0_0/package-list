@@ -1,0 +1,4 @@
+com.logitopia.jmortar.core.object.annotation
+com.logitopia.jmortar.core.object.exception
+com.logitopia.jmortar.core.object.util
+com.logitopia.jmortar.core.object.util.impl
