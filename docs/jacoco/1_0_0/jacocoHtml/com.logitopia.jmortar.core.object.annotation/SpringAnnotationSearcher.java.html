@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpringAnnotationSearcher.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jmortar-core-object</a> &gt; <a href="index.source.html" class="el_package">com.logitopia.jmortar.core.object.annotation</a> &gt; <span class="el_source">SpringAnnotationSearcher.java</span></div><h1>SpringAnnotationSearcher.java</h1><pre class="source lang-java linenums">package com.logitopia.jmortar.core.object.annotation;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpringAnnotationSearcher.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jmortar-core-object</a> &gt; <a href="index.source.html" class="el_package">com.logitopia.jmortar.core.object.annotation</a> &gt; <span class="el_source">SpringAnnotationSearcher.java</span></div><h1>SpringAnnotationSearcher.java</h1><pre class="source lang-java linenums">/*
+ *     JMortar - Tools to make your Java life easier.
+ *     Copyright (C) 2015-2018 Stephen Cheesley
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+package com.logitopia.jmortar.core.object.annotation;
 
 import com.logitopia.jmortar.core.object.exception.InvalidAnnotationException;
 import org.slf4j.Logger;
@@ -17,34 +35,34 @@ import java.util.List;
  * An &lt;tt&gt;AnnotationSearcher&lt;/tt&gt; that uses a Spring-based implementation.
  */
 @Component(&quot;springAnnotationSearcher&quot;)
-<span class="fc" id="L20">public final class SpringAnnotationSearcher implements AnnotationSearcher {</span>
+<span class="fc" id="L38">public final class SpringAnnotationSearcher implements AnnotationSearcher {</span>
 
     /**
      * The logger for this class.
      */
-<span class="fc" id="L25">    public static final Logger LOG</span>
-<span class="fc" id="L26">            = LoggerFactory.getLogger(SpringAnnotationSearcher.class);</span>
+<span class="fc" id="L43">    public static final Logger LOG</span>
+<span class="fc" id="L44">            = LoggerFactory.getLogger(SpringAnnotationSearcher.class);</span>
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List&lt;Class&gt; search(Class annotation) throws InvalidAnnotationException, ClassNotFoundException {
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
-<span class="nc" id="L34">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
+<span class="nc" id="L52">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
         }
-<span class="fc" id="L36">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L54">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
 
         // ::.. Calibrate the searcher ..::
-<span class="fc" id="L39">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotation);</span>
+<span class="fc" id="L57">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotation);</span>
 
         // ::.. Run the Search ..::
-<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
-<span class="fc" id="L43">            Class model = Class.forName(beanDef.getBeanClassName());</span>
-<span class="fc" id="L44">            result.add(model);</span>
-<span class="fc" id="L45">        }</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
+<span class="fc" id="L61">            Class model = Class.forName(beanDef.getBeanClassName());</span>
+<span class="fc" id="L62">            result.add(model);</span>
+<span class="fc" id="L63">        }</span>
 
-<span class="fc" id="L47">        return result;</span>
+<span class="fc" id="L65">        return result;</span>
     }
 
     /**
@@ -53,25 +71,25 @@ import java.util.List;
     @Override
     public List&lt;Class&gt; search(Class annotation, Class without)
             throws InvalidAnnotationException, ClassNotFoundException {
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
-<span class="nc" id="L57">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        } else if (!without.isAnnotation()) {</span>
-<span class="nc" id="L59">            throw new InvalidAnnotationException(&quot;The class [&quot; + without.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
+<span class="nc" id="L75">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        } else if (!without.isAnnotation()) {</span>
+<span class="nc" id="L77">            throw new InvalidAnnotationException(&quot;The class [&quot; + without.getName() + &quot;] is NOT an annotation.&quot;);</span>
         }
-<span class="fc" id="L61">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L79">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
 
         // ::.. Calibrate the searcher ..::
-<span class="fc" id="L64">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotation);</span>
+<span class="fc" id="L82">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotation);</span>
 
         // ::.. Run the Search ..::
-<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
-<span class="fc" id="L68">            Class model = Class.forName(beanDef.getBeanClassName());</span>
-<span class="fc bfc" id="L69" title="All 2 branches covered.">            if(!model.isAnnotationPresent(without)) {</span>
-<span class="fc" id="L70">                result.add(model);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
+<span class="fc" id="L86">            Class model = Class.forName(beanDef.getBeanClassName());</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            if(!model.isAnnotationPresent(without)) {</span>
+<span class="fc" id="L88">                result.add(model);</span>
             }
-<span class="fc" id="L72">        }</span>
+<span class="fc" id="L90">        }</span>
 
-<span class="fc" id="L74">        return result;</span>
+<span class="fc" id="L92">        return result;</span>
     }
 
     /**
@@ -79,56 +97,56 @@ import java.util.List;
      */
     @Override
     public List&lt;Class&gt; search(List&lt;Class&gt; annotations) throws InvalidAnnotationException, ClassNotFoundException {
-<span class="fc bfc" id="L82" title="All 2 branches covered.">        for (Class annotation:annotations) {</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">            if (!annotation.isAnnotation()) {</span>
-<span class="nc" id="L84">                throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (Class annotation:annotations) {</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">            if (!annotation.isAnnotation()) {</span>
+<span class="nc" id="L102">                throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
             }
-<span class="fc" id="L86">        }</span>
-<span class="fc" id="L87">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L104">        }</span>
+<span class="fc" id="L105">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
 
         // ::.. Calibrate the searcher ..::
-<span class="fc" id="L90">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotations);</span>
+<span class="fc" id="L108">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotations);</span>
 
         // ::.. Run the Search ..::
-<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
-<span class="fc" id="L94">            Class model = Class.forName(beanDef.getBeanClassName());</span>
-<span class="fc" id="L95">            result.add(model);</span>
-<span class="fc" id="L96">        }</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
+<span class="fc" id="L112">            Class model = Class.forName(beanDef.getBeanClassName());</span>
+<span class="fc" id="L113">            result.add(model);</span>
+<span class="fc" id="L114">        }</span>
 
-<span class="fc" id="L98">        return result;</span>
+<span class="fc" id="L116">        return result;</span>
     }
 
     @Override
     public List&lt;Class&gt; search(List&lt;Class&gt; annotations, List&lt;Class&gt; without) throws InvalidAnnotationException, ClassNotFoundException {
-<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (Class annotation:annotations) {</span>
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (!annotation.isAnnotation()) {</span>
-<span class="nc" id="L105">                throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        for (Class annotation:annotations) {</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">            if (!annotation.isAnnotation()) {</span>
+<span class="nc" id="L123">                throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
             }
-<span class="fc" id="L107">        }</span>
-<span class="fc" id="L108">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L125">        }</span>
+<span class="fc" id="L126">        List&lt;Class&gt; result = new ArrayList&lt;&gt;();</span>
 
         // ::.. Calibrate the searcher ..::
-<span class="fc" id="L111">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotations);</span>
+<span class="fc" id="L129">        ClassPathScanningCandidateComponentProvider provider = createComponentScanner(annotations);</span>
 
         // ::.. Run the Search ..::
-<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
-<span class="fc" id="L115">            Class model = Class.forName(beanDef.getBeanClassName());</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        for (BeanDefinition beanDef : provider.findCandidateComponents(&quot;&quot;)) {</span>
+<span class="fc" id="L133">            Class model = Class.forName(beanDef.getBeanClassName());</span>
             // TODO - Update this to loop through the annotations ... optimize by not looping above
-<span class="fc bfc" id="L117" title="All 2 branches covered.">            for (Class filter:without) {</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            for (Class filter:without) {</span>
                 // Check the filter class
-<span class="pc bpc" id="L119" title="1 of 2 branches missed.">                if (!filter.isAnnotation()) {</span>
-<span class="nc" id="L120">                    throw new InvalidAnnotationException(&quot;The class [&quot; + filter.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                if (!filter.isAnnotation()) {</span>
+<span class="nc" id="L138">                    throw new InvalidAnnotationException(&quot;The class [&quot; + filter.getName() + &quot;] is NOT an annotation.&quot;);</span>
                 }
 
                 // Only return it if it is not present
-<span class="fc bfc" id="L124" title="All 2 branches covered.">                if(!model.isAnnotationPresent(filter)) {</span>
-<span class="fc" id="L125">                    result.add(model);</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">                if(!model.isAnnotationPresent(filter)) {</span>
+<span class="fc" id="L143">                    result.add(model);</span>
                 }
-<span class="fc" id="L127">            }</span>
+<span class="fc" id="L145">            }</span>
 //            result.add(model);
-<span class="fc" id="L129">        }</span>
+<span class="fc" id="L147">        }</span>
 
-<span class="fc" id="L131">        return result;</span>
+<span class="fc" id="L149">        return result;</span>
     }
 
     /**
@@ -136,19 +154,19 @@ import java.util.List;
      */
     @Override
     public List&lt;Field&gt; searchClassForAnnotatedFields(Class annotation, Class clazzToSearch) throws InvalidAnnotationException {
-<span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
-<span class="nc" id="L140">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
+<span class="nc" id="L158">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
         }
 
-<span class="fc" id="L143">        List&lt;Field&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L161">        List&lt;Field&gt; result = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L145" title="All 2 branches covered.">        for(Field field : clazzToSearch.getDeclaredFields()){</span>
-<span class="fc bfc" id="L146" title="All 2 branches covered.">            if (field.isAnnotationPresent(annotation)) {</span>
-<span class="fc" id="L147">                result.add(field);</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        for(Field field : clazzToSearch.getDeclaredFields()){</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">            if (field.isAnnotationPresent(annotation)) {</span>
+<span class="fc" id="L165">                result.add(field);</span>
             }
         }
 
-<span class="fc" id="L151">        return result;</span>
+<span class="fc" id="L169">        return result;</span>
     }
 
     /**
@@ -156,19 +174,19 @@ import java.util.List;
      */
     @Override
     public List&lt;String&gt; searchClassForAnnotatedFieldNames(Class annotation, Class clazzToSearch) throws InvalidAnnotationException {
-<span class="pc bpc" id="L159" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
-<span class="nc" id="L160">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">        if (!annotation.isAnnotation()) {</span>
+<span class="nc" id="L178">            throw new InvalidAnnotationException(&quot;The class [&quot; + annotation.getName() + &quot;] is NOT an annotation.&quot;);</span>
         }
 
-<span class="fc" id="L163">        List&lt;String&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L181">        List&lt;String&gt; result = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L165" title="All 2 branches covered.">        for(Field field : clazzToSearch.getDeclaredFields()){</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (field.isAnnotationPresent(annotation)) {</span>
-<span class="fc" id="L167">                result.add(field.getName());</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        for(Field field : clazzToSearch.getDeclaredFields()){</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">            if (field.isAnnotationPresent(annotation)) {</span>
+<span class="fc" id="L185">                result.add(field.getName());</span>
             }
         }
 
-<span class="fc" id="L171">        return result;</span>
+<span class="fc" id="L189">        return result;</span>
     }
 
     /**
@@ -178,10 +196,10 @@ import java.util.List;
      * @return The Spring &lt;tt&gt;ClassPathScanningCandidateComponentProvider&lt;/tt&gt; that has been calibrate.
      */
     private ClassPathScanningCandidateComponentProvider createComponentScanner(final Class annotation) {
-<span class="fc" id="L181">        ClassPathScanningCandidateComponentProvider provider</span>
+<span class="fc" id="L199">        ClassPathScanningCandidateComponentProvider provider</span>
                 = new ClassPathScanningCandidateComponentProvider(false);
-<span class="fc" id="L183">        provider.addIncludeFilter(new AnnotationTypeFilter(annotation));</span>
-<span class="fc" id="L184">        return provider;</span>
+<span class="fc" id="L201">        provider.addIncludeFilter(new AnnotationTypeFilter(annotation));</span>
+<span class="fc" id="L202">        return provider;</span>
     }
 
     /**
@@ -191,12 +209,12 @@ import java.util.List;
      * @return The Spring &lt;tt&gt;ClassPathScanningCandidateComponentProvider&lt;/tt&gt; that has been calibrated.
      */
     private ClassPathScanningCandidateComponentProvider createComponentScanner(final List&lt;Class&gt; annotations) {
-<span class="fc" id="L194">        ClassPathScanningCandidateComponentProvider provider</span>
+<span class="fc" id="L212">        ClassPathScanningCandidateComponentProvider provider</span>
                 = new ClassPathScanningCandidateComponentProvider(false);
-<span class="fc bfc" id="L196" title="All 2 branches covered.">        for (Class annotation: annotations) {</span>
-<span class="fc" id="L197">            provider.addIncludeFilter(new AnnotationTypeFilter(annotation));</span>
-<span class="fc" id="L198">        }</span>
-<span class="fc" id="L199">        return provider;</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">        for (Class annotation: annotations) {</span>
+<span class="fc" id="L215">            provider.addIncludeFilter(new AnnotationTypeFilter(annotation));</span>
+<span class="fc" id="L216">        }</span>
+<span class="fc" id="L217">        return provider;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
